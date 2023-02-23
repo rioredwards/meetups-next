@@ -8,7 +8,7 @@ async function handler(req, res) {
 
     // connect to the database
     const client = await MongoClient.connect(
-      "mongodb+srv://rioredwards:T4OKFV2xtSEFW3Nn@cluster0.pnosh5s.mongodb.net/?retryWrites=true&w=majority"
+      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@${process.env.DB_CLUSTER_URL}.pnosh5s.mongodb.net/?retryWrites=true&w=majority`
     );
     const db = client.db();
     const meetupsCollection = db.collection("meetups");
