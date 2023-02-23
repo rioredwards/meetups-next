@@ -1,9 +1,21 @@
 import { MongoClient } from "mongodb";
+import Head from "next/head.js";
 import MeetupList from "../components/meetups/MeetupList";
 
 // Props are passed to the component from getStaticProps()
 function HomePage(props) {
-  return <MeetupList meetups={props.meetups} />;
+  return (
+    <>
+      <Head>
+        <title>React Meetups</title>
+        <meta
+          name="description"
+          content="Browse a huge list of highly active React Meetups!"
+        />
+      </Head>
+      <MeetupList meetups={props.meetups} />
+    </>
+  );
 }
 
 // loaded before the page is rendered
@@ -12,7 +24,7 @@ export async function getStaticProps() {
 
   // connect to the database
   const client = await MongoClient.connect(
-    "mongodb+srv://rioredwards:T4OKFV2xtSEFW3Nn@cluster0.pnosh5s.mongodb.net/?retryWrites=true&w=majority"
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@${process.env.DB_CLUSTER_URL}.pnosh5s.mongodb.net/?retryWrites=true&w=majority`
   );
   const db = client.db();
   const meetupsCollection = db.collection("meetups");
