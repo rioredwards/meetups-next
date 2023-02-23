@@ -37,7 +37,8 @@ export async function getStaticPaths() {
   return {
     // if fallback: false: (exhaustive) any meetupId that is not defined will result in a 404 page
     // if fallback: true: (partial) any meetupId that is not defined will be fetched on the client side
-    fallback: false,
+    // if fallback: blocking: (partial) similar to true, but wait for the page to be generated before serving it to the client
+    fallback: "blocking",
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
