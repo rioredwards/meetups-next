@@ -13,10 +13,10 @@ function MeetupItem(props) {
   return (
     <li className={classes.item}>
       <Card>
-        <div className={classes.image}>
+        <div className={classes.imageContainer}>
           <Image
             style={{ objectFit: "cover" }}
-            alt="Mountains"
+            alt={props.description}
             src={props.image}
             fill
           />
